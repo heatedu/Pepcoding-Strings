@@ -22,19 +22,51 @@ public:
     
     
     //M2:ALTHOUGH APPROACH IS SAME
-    vector<vector<string>> groupAnagrams(vector<string>& strs) {
-	unordered_map<string, vector<string>> count;
-	int i = 0;
-	for (auto s : strs)
-	{
-		sort(s.begin(), s.end());
-		count[s].push_back(strs[i++]);
-	}
-	vector<vector<string>> res;
-	for (auto n : count){
-		//sort(n.second.begin(), n.second.end());(OPTIONAL BCZ WE CAN RETURN IN ANY ORDER)
-		res.push_back(n.second);
-	}
-	return res;
+//     vector<vector<string>> groupAnagrams(vector<string>& strs) {
+// 	unordered_map<string, vector<string>> count;
+// 	int i = 0;
+// 	for (auto s : strs)
+// 	{
+// 		sort(s.begin(), s.end());
+// 		count[s].push_back(strs[i++]);
+// 	}
+// 	vector<vector<string>> res;
+// 	for (auto n : count){
+// 		//sort(n.second.begin(), n.second.end());(OPTIONAL BCZ WE CAN RETURN IN ANY ORDER)
+// 		res.push_back(n.second);
+// 	}
+// 	return res;
+// }
+    
+    //MOST EFFICIENT
+   /* In the previous approach, we were sorting every string in order to maintain a similar key, but that cost extra time in this approach will take the advantage of another hashmap to maintain the frequency of the characters which will generate the same hash function for different string having same frequency of characters.
+Here, we will take HashMap<HashMap, ArrayList>, the inner hashmap will count the frequency of the characters of each string and the outer HashMap will check whether that hashmap is present or not if present then it will add that string to the corresponding list.*/
+  
+    
+    
+    
+vector<vector<string>> groupAnagrams(vector<string>& s) {
+      map<map<char, int>, vector<string>> my_map;
+      for(string str:s)
+      {
+          map<char,int>temp_map;
+          vector<string> temp_str;
+          for(int j=0;j<str.length();j++)
+              temp_map[str[j]]++;
+          auto it=my_map.find(temp_map);
+          if(it!=my_map.end())
+              it->second.push_back(str);
+          else
+          {
+              my_map[temp_map].push_back(str);
+          }
+      }
+      vector<vector<string>> ans;
+   
+   for(auto it=my_map.begin();it!=my_map.end();it++){
+       ans.push_back(it->second);
+   }
+   return ans;
 }
+    
 };
