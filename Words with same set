@@ -1,0 +1,24 @@
+string getKey(string words)
+{
+    vector<bool>visited(26,false);
+    for(int i=0;i<words.length();i++)
+        visited[words[i]-'a']=true;
+    string key="";
+    for(int i=0;i<26;i++)
+    {
+        if(visited[i])
+            key+=(char)(i+'a');
+    }
+    return key;
+}
+
+void wordsWithSameCharSet(string words[], int n)
+{
+    unordered_map<string,vector<int>>m;
+    for(int i=0;i<n;i++)
+    {
+        string key=getKey(words[i]);
+        m[key].pb(i);
+    }
+    //print krlena khud
+}
