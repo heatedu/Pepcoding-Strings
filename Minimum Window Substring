@@ -1,0 +1,43 @@
+class Solution {
+public:
+    bool gotAll(int hash[],int h2[])
+    {
+        for(int i=0;i<126;i++)
+        {
+            if(h2[i]<hash[i])
+                return false;
+        }
+        return true;
+    }
+    string minWindow(string s, string t) {
+        int hash[126]={0};
+        int len=s.length();
+        int ansl=-1,ansr=-1;
+        int r=0,l=0;
+        int h2[126]={0};
+        for(auto c:t)
+            hash[c]++;
+        int i=-1;
+        while(i<len)
+        {
+            while(!gotAll(hash,h2) and i<len)
+            {
+                i++;h2[s[i]]++;
+            }
+            if(gotAll(hash,h2))
+            {
+                r=i;
+                if(ansl==-1 or ansr==-1 or r-l<=ansr-ansl)//finding minimum
+                {
+                    ansr=r;
+                    ansl=l;
+                }
+                h2[s[l]]--;
+                l++;
+            }
+        }
+        if(ansl==-1 ||ansr==-1)
+            return "";
+        return s.substr(ansl,ansr-ansl+1);
+    }
+};
