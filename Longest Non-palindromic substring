@@ -1,0 +1,7 @@
+Check for the case where all characters of
+the string are same or not.
+    If yes, then answer will be '0'.
+Else check whether the given string of size 
+'n' is palindrome or not. 
+    If yes, then answer will be 'n-1'
+Else answer will be 'n' 
