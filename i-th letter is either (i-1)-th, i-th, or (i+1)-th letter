@@ -1,0 +1,49 @@
+For any letter at index i, except first and last letter, there are three possible letter i.e (i-1)th, ith or (i+1)th letter of given words. 
+So, if three of them are distinct, we have 3 possibilities. If two of them are same, we have 2 possibilities. And if all are same we have only 1 possibility.
+So, traverse the given words and find the possibility of each letter and multiply them.
+
+Similarly, for first letter check the distinct letter at first and second position.
+And for last position check the distinct letter at last and second last position.
+
+int countWords(char str[], int len) 
+{ 
+    int count = 1; 
+  
+    // If word contain single letter, return 1. 
+    if (len == 1) 
+        return count; 
+  
+    // Checking for first letter. 
+    if (str[0] == str[1]) 
+        count *= 1; 
+    else
+        count *= 2; 
+  
+    // Traversing the string and multiplying 
+    // for combinations. 
+    for (int j=1; j<len-1; j++) 
+    { 
+        // If all three letters are same. 
+        if (str[j] == str[j-1] && str[j] == str[j+1]) 
+            count *= 1; 
+  
+        // If two letter are distinct. 
+        else if (str[j] == str[j-1] || 
+                 str[j] == str[j+1] || 
+                 str[j-1] == str[j+1]) 
+            count *= 2; 
+  
+        // If all three letter are distinct. 
+        else
+            count *= 3; 
+    } 
+  
+    // Checking for last letter. 
+    if (str[len - 1] == str[len - 2]) 
+        count *= 1; 
+    else
+        count *= 2; 
+  
+    return count; 
+} 
+  
