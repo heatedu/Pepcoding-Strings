@@ -1,0 +1,56 @@
+The answer is as simple as this. Just remove all the consecutive duplicates in both the strings like if the string is hello make it as helo. 
+This can be made in O(n) time.
+
+After this find lcs of both modified strings. The answer is length(s1) + length(s2) - lcs
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+ 
+int LCS(string X,string Y, int m, int n )
+{
+int length[m+1][n+1];
+int i, j;
+for (i=0; i<=m; i++)
+{
+	for (j=0; j<=n; j++)
+	{
+	if (i == 0 || j == 0)
+		length[i][j] = 0;
+ 
+	else if (X[i-1] == Y[j-1])
+		length[i][j] = length[i-1][j-1] + 1;
+ 
+	else
+		length[i][j] = max(length[i-1][j], length[i][j-1]);
+	}
+}
+return length[m][n];
+}
+int main(){
+	ios_base::sync_with_stdio(false);
+	int test;
+	cin>>test;
+	while(test--){
+		int N,M;
+		cin>>N>>M;
+		string s1,s2,st1="",st2="";
+		cin>>s1>>s2;
+		st1+=s1[0];
+		st2+=s2[0];
+		for(int i=1;i<N;i++){
+			if(s1[i]!=s1[i-1]){
+				st1+=s1[i];
+			}
+		}
+		for(int i=1;i<M;i++){
+			if(s2[i]!=s2[i-1]){
+				st2+=s2[i];
+			}
+		}
+		int ans=st1.size()+st2.size();
+		cout<<ans-LCS(st1,st2,st1.size(),st2.size())<<endl;
+	}
+	return 0; 
+	}
