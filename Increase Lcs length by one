@@ -1,0 +1,21 @@
+For any two given alphanumeric strings,  and , of lengths  and , we must find the number of ways to insert a single character into  such that the length of the Longest Common Subsequence (LCS) of  and  increases by  after the insertion.
+
+Let's assume that for a given  and , the length of their LCS is . Let's insert a single character  after the  character in  and denote the string formed after the insertion as , which looks like:
+
+where  denotes a substring of  from the  to the  characters and  denotes a concatenation of two strings.
+
+Let's define  to be the length of the LCS of  and . Now we want to know if .
+
+The crucial observation is that the newly inserted character, , must be a part of any common subsequence of  and  having length . We know this because if there is any common subsequence of  and  that doesn't contain the newly inserted character, , yet has a length , then it's also a common subsequence of  and ; this is a contradiction, because it would mean the length of the LCS of  and  is .
+
+Using the observation above, we can try the following approach. For each possible character  (there are  upper and lower case English letters and  arabic digits, so there are  possible characters to insert) and for every possible insertion position  in  (there are  insertion positions), let's try to insert  after the  character in  and match it with every occurrence of  in . For example, for a fixed , , and , which denotes a position of a single occurrence of character  in , we can try to match these  characters such that:
+
+Now, in order to check if such an insertion produces an LCS of length , it's sufficient to check if the length of the LCS of  and  plus the length of the LCS of  and  is equal to . In this case, the LCS of  and  is  because there is both a match between the fixed occurrences of character  and there is no longer common subsequence between them.
+
+If we can quickly get the length of the LCS between every two prefixes of  and  as well as between every two of their suffixes, we can compute the result. The length of the LCS between their prefixes can be read from a classic dynamic programming table used in computing the LCS of  and . In this method,  stores the length of the longest common subsequence of  and . Similarly, the length of the LCS between their suffixes can be read from an analogous  table which is computed during computation of the LCS of  and  where  denotes the reversed string .
+
+The time complexity of this approach is . Precomputation of both  tables takes  time. Moreover, there are  insertion positions in  to consider, and for each of them we are trying  matches (i.e., all occurrences of every possible character in ).
+
+For the implementation of this solution, take a look at the setter's code. Moreover, if you want to see an implementation with an  running time, take a look at the commented-out solution in the tester's code.
+
+https://www.hackerrank.com/challenges/tutzki-and-lcs/editorial
