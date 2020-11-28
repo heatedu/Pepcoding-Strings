@@ -1,0 +1,26 @@
+
+bool isSubSequence(string str1, string str2) 
+{ 
+    int m = str1.length(), n = str2.length(); 
+    int j = 0; // For index of str1 (or subsequence 
+    for (int i=0; i<n&&j<m; i++) 
+        if (str1[j] == str2[i]) 
+            j++; 
+    return (j==m); 
+} 
+string findLongestString(vector <string > dict, string str) 
+{ 
+    string result = ""; 
+    int length = 0; 
+    for (string word : dict) 
+    {  
+        if (length < word.length() && isSubSequence(word, str)) 
+        { 
+            result = word; 
+            length = word.length(); 
+        } 
+    } 
+  
+    // Return longest string 
+    return result; 
+}
