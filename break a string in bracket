@@ -1,0 +1,96 @@
+/*
+***********************
+Author : Samarth Gupta*
+***********************
+*/
+#include <algorithm>
+#include <bits/stdc++.h>
+#include <unordered_map>
+#include <unordered_set>
+using namespace std;
+#define mod (int) 998244353
+#define MOD (int) 1e9+7
+// Big two primes
+#define X 1001100011100001111ll
+#define all(a) a.begin(),a.end()
+#define for0(i, n) for (int i = 0; i < n; i++)
+#define for1(i, n) for (int i = 1; i <= n; i++)
+#define loop(i,a,b) for (int i = a; i < b; i++)
+#define bloop(i,a,b) for (int i = a ; i>=b;i--)
+#define t int t; cin >> t; while (t--)
+#define ll long long
+#define float long double
+#define pb emplace_back
+#define fio ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL)
+#define rr return 0
+#define prec(n) fixed<<setprecision(n)
+#define maxpq priority_queue<int>
+#define minpq priority_queue<int, vector<int>, greater<int> >
+#define inf (int)(1e18)
+#define ini(a, i) memset(a, i, sizeof(a))
+#define vi vector<int>
+#define fi first
+#define se second
+#define endl "\n"
+#define ii pair<int, int>
+#define vii vector<ii>
+#define sz(s) s.size()
+#define bits(n) __builtin_popcount(n)
+#define mx *max_element
+#define mn *min_element
+#define yes cout<<"YES\n"
+#define no cout<<"NO\n"
+#define ub upper_bound
+#define lb lower_bound
+#define in(a) for(auto &x : a) cin>>x;
+#define pr(a) for(auto x : a) cout<<x<<" "; cout<<"\n";
+const int MAXN = (int)((1e5) + 100);
+int gcd(int a,int b){   if(b==0)return a;else return gcd(b,a%b);}
+int max(int a, int b) {if (a > b) return a; else return b;}
+int min(int a, int b) {if (a < b) return a; else return b;}
+void prl(int x) {cout << x << endl;}
+const int N =  (int)(1 * 1e6 + 10);
+using namespace std;
+/*int add(int a, int b){
+	a += b;
+	if (a >= MOD)
+		a -= MOD;
+	if (a < 0)
+		a += MOD;
+	return a;
+}
+ 
+int mul(int a, int b){
+	return a * ll(b) % MOD;
+}*/
+void findAndPrintAll(string s, int n , int curr, string ss) {
+  if(n == curr){
+        ss+=')';
+      cout<<ss<<endl;
+        //for(char c : vc) cout<<c;cout<<endl;
+        return;
+    }
+    //option 1 ss ka bracket band krke apna bracket bnaya
+    ss+=')';
+    ss+='(';
+    ss+=s[curr];
+    findAndPrintAll(s,n,curr + 1,ss);
+    ss.erase(ss.end()-1);//deleting last char
+    ss.erase(ss.end()-1);
+    ss.erase(ss.end()-1);
+    //option 2 ussi k bracket m add ho gya
+    ss+=s[curr];
+    findAndPrintAll(s,n,curr+1,ss);
+}
+signed main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);cout.tie(NULL);
+    string s;
+    cin>>s;
+    string ss="";
+    ss+='(';
+    ss+=s[0];//s[0] se phle opening bracket th aana hi aana h
+    //ab har cha k paas do option hai ya th jo ss string h usme ese ki ese hi add ho jae bina bracket bnd kiye ya fr ss ka bracket bnd krke ek apna bracket bnae
+    findAndPrintAll(s, s.length(), 1 , ss);
+}
