@@ -1,0 +1,16 @@
+class Solution {
+public:
+    bool isIsomorphic(string s, string t1) {
+         char map_s[128] = { 0 };
+         char map_t1[128] = { 0 };
+        int n=s.size();
+        for(int i=0;i<n;i++)
+        {
+            if(map_s[s[i]]!=map_t1[t1[i]])
+                return false;
+            map_s[s[i]]=i+1;
+            map_t1[t1[i]]=i+1;
+        }
+        return true;
+    }
+};
